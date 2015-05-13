@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Calendars available"
+gcsms ls -l
+echo "------------------"
+echo " "
+read -r -p "DELETE A CALENDAR:" calendarname
+/usr/local/bin/gcsms leave $calendarname

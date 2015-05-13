@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ $# -eq 2 ]; then
+	calendar=$1
+	message=$2
+	colecho "Sending $message to $calendar" $OK
+	/usr/local/bin/gcsms -c "/root/.gcsms" send $calendar "$message" 
+else
+	errorBox "Wrong number of arguments"
+	usage 'gcsmsSend calendar text'
+	example 'gcsmsSend "PiCalendar" "This is a test"' 
+fi
