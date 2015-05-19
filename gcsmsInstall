@@ -13,7 +13,7 @@ cat <<\EOF > /root/.gcsms &&
     client_secret = 
 EOF
 
-messagebox "Go to https://cloud.google.com/console and go to Apis & Auth / Credentials"
+messagebox "Go to https://console.developers.google.com/project and go to Apis & Auth / Credentials"
 read -r -p "CLIENT ID:" client_id
 replaceLine "/root/.gcsms" "client_id =" "client_id = $client_id" "\[global\]"
 read -r -p "CLIENT SECRET:" client_secret
