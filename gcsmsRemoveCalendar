@@ -4,4 +4,4 @@ gcsms ls -l
 echo "------------------"
 echo " "
 read -r -p "DELETE A CALENDAR:" calendarname
-/usr/local/bin/gcsms leave $calendarname
+/usr/local/bin/gcsms -c "/opt/user/config/gcsms/gcsms" leave $calendarname

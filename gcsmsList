@@ -1,5 +1,5 @@
 #!/bin/bash
 echo "Calendars available"
-gcsms ls -l
+gcsms -c "/opt/user/config/gcsms/gcsms" ls -l
 echo "------------------"
 

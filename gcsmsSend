@@ -3,7 +3,7 @@ if [ $# -eq 2 ]; then
 	calendar=$1
 	message=$2
 	colecho "Sending $message to $calendar" $OK
-	/usr/local/bin/gcsms -c "/root/.gcsms" send $calendar "$message" 
+	/usr/local/bin/gcsms -c "/opt/user/config/gcsms/gcsms" send $calendar "$message" 
 else
 	errorBox "Wrong number of arguments"
 	usage 'gcsmsSend calendar text'

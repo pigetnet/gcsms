@@ -4,10 +4,11 @@ description "Install oxplot/GCSMS"
 messagebox "https://github.com/oxplot/gcsms"
 installer python-pip
 pip install gcsms
-touch /root/.gcsms
+mkdir /opt/user/config/gcsms
+touch /opt/user/config/gcsms/gcsms
 
-messagebox "Generating configuration /root/.gcsms"
-cat <<\EOF > /root/.gcsms &&
+messagebox "Generating configuration /opt/user/config/gcsms/gcsms"
+cat <<\EOF > /opt/user/config/gcsms/gcsms &&
 [global]
     client_id = 
     client_secret = 
@@ -15,10 +16,10 @@ EOF
 
 messagebox "Go to https://console.developers.google.com/project and go to Apis & Auth / Credentials"
 read -r -p "CLIENT ID:" client_id
-replaceLine "/root/.gcsms" "client_id =" "client_id = $client_id" "\[global\]"
+replaceLine "/opt/user/config/gcsms/gcsms" "client_id =" "client_id = $client_id" "\[global\]"
 read -r -p "CLIENT SECRET:" client_secret
-replaceLine "/root/.gcsms" "client_secret =" "client_secret = $client_secret" "\[global\]"
-gcsms auth
+replaceLine "/opt/user/config/gcsms/gcsms" "client_secret =" "client_secret = $client_secret" "\[global\]"
+gcsms -c "/opt/user/config/gcsms/gcsms" auth
 
 description "Installation finished!"
 messagebox "You need to create a calendar gcsmsAddCalendar"
