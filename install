@@ -1,0 +1,25 @@
+#!/bin/bash
+
+/show/description "Install oxplot/GCSMS"
+/show/messagebox "More information at https://github.com/oxplot/gcsms"
+/system/install python-pip
+pip install gcsms
+/system/makedir /opt/user/config/gcsms
+touch /opt/user/config/gcsms/gcsms
+
+/show/listecho "Generating configuration /opt/user/config/gcsms/gcsms" $OK
+cat <<\EOF > /opt/user/config/gcsms/gcsms &&
+[global]
+    client_id = 
+    client_secret = 
+EOF
+
+/show/listecho "Go to https://console.developers.google.com/project and go to Apis & Auth / Credentials" $WARN
+read -r -p "CLIENT ID:" client_id
+/string/replaceLine "/opt/user/config/gcsms/gcsms" "client_id =" "client_id = $client_id" "\[global\]"
+read -r -p "CLIENT SECRET:" client_secret
+/string/replaceLine "/opt/user/config/gcsms/gcsms" "client_secret =" "client_secret = $client_secret" "\[global\]"
+gcsms -c "/opt/user/config/gcsms/gcsms" auth
+
+/show/listecho "Installation finished!" $OK
+/show/listecho "You need to create a calendar /do/gcsms/addCalendar" $WARN

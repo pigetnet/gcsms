@@ -1,0 +1,15 @@
+#!/bin/bash
+/show/listecho "Calendars available" $OK
+gcsms -c "/opt/user/config/gcsms/gcsms" ls -l
+echo "------------------"
+echo " "
+read -r -p "CREATE A CALENDAR:" calendarname
+if [ -n "${calendarname-unset}" ];then
+	/show/listecho "Create $calendarname" $OK
+	/usr/local/bin/gcsms -c "/opt/user/config/gcsms/gcsms" create $calendarname
+	/usr/local/bin/gcsms -c "/opt/user/config/gcsms/gcsms" unmute $calendarname
+	/show/listecho "Test $calendarname" $OK
+	/usr/local/bin/gcsms -c "/opt/user/config/gcsms/gcsms" send $calendarname "This is a test" 
+else	
+	/show/listecho "Cancelled [SKIPPED]" $INFO
+fi
